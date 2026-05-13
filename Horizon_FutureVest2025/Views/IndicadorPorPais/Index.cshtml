@@ -1,0 +1,61 @@
+﻿@model List<Application.ViewModels.IndicadorPorPais.IndicadorPorPaisViewModel>
+@{
+    ViewData["Title"] = "Indicadores por País";
+}
+
+<div class="row">
+    <div class="text-center">
+        <h1 class="display-4">Indicadores por País</h1>
+    </div>
+</div>
+
+<form asp-controller="IndicadorPorPais" asp-action="Filtrar" method="GET" class="row mt-4">
+    <div class="col-md-4">
+        <label class="form-label">País:</label>
+        <select name="paisId" class="form-select">
+            <option value="">Seleccione un país</option>
+            @foreach (var pais in ViewBag.Paises as List<SelectListItem>)
+            {
+                <option value="@pais.Value">@pais.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">Año:</label>
+        <input type="number" name="anio" class="form-control" />
+    </div>
+    <div class="col-md-2 mt-4">
+        <button type="submit" class="btn btn-outline-primary">Filtrar</button>
+    </div>
+    <div class="col-md-4 mt-4 text-end">
+        <a class="btn btn-outline-success" asp-controller="IndicadorPorPais" asp-action="Create">+ Nuevo indicador</a>
+    </div>
+</form>
+
+<div class="row mt-4">
+    @if (Model.Count == 0)
+    {
+        <div class="text-center">
+            <h4 class="display-6">No hay indicadores registrados</h4>
+        </div>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-12 col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.NombreMacroindicador</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.NombrePais - Año: @item.Anio</h6>
+                        <p class="card-text">Valor: @item.Valor</p>
+                        <div class="mt-2">
+                            <a class="btn btn-outline-warning float-end" asp-controller="IndicadorPorPais" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                            <a class="btn btn-outline-danger float-end me-2" asp-controller="IndicadorPorPais" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

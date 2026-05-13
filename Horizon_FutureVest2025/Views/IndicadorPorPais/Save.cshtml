@@ -1,0 +1,71 @@
+﻿@model Application.ViewModels.IndicadorPorPais.SaveIndicadorPorPaisViewModel
+@{
+    bool editMode = ViewBag.EditMode ?? false;
+    ViewData["Title"] = "Guardar indicador";
+}
+
+<div class="col-12 col-md-6 offset-md-3">
+    <div class="card">
+        <div class="card-header bg-success text-light">
+            <h5 class="text-center">@(editMode ? "Editar indicador" : "Nuevo indicador")</h5>
+        </div>
+        <div class="card-body">
+            <form asp-controller="IndicadorPorPais" asp-action="@(editMode ? "Edit" : "Create")" method="POST">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="PaisId" class="form-label">País:</label>
+                    <select asp-for="PaisId" class="form-select" disabled="@editMode">
+                        <option value="">Seleccione un país</option>
+                        @foreach (var pais in ViewBag.Paises as List<SelectListItem>)
+                        {
+                            <option value="@pais.Value">@pais.Text</option>
+                        }
+                    </select>
+                    @if (editMode)
+                    {
+                        <input type="hidden" asp-for="PaisId" />
+                    }
+                    <span asp-validation-for="PaisId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MacroindicadorId" class="form-label">Macroindicador:</label>
+                    <select asp-for="MacroindicadorId" class="form-select" disabled="@editMode">
+                        <option value="">Seleccione un macroindicador</option>
+                        @foreach (var macro in ViewBag.Macroindicadores as List<SelectListItem>)
+                        {
+                            <option value="@macro.Value">@macro.Text</option>
+                        }
+                    </select>
+                    @if (editMode)
+                    {
+                        <input type="hidden" asp-for="MacroindicadorId" />
+                    }
+                    <span asp-validation-for="MacroindicadorId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Valor" class="form-label">Valor:</label>
+                    <input class="form-control" asp-for="Valor" step="0.0001" type="number" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Anio" class="form-label">Año:</label>
+                    <input class="form-control" asp-for="Anio" type="number" disabled="@editMode" />
+                    @if (editMode)
+                    {
+                        <input type="hidden" asp-for="Anio" />
+                    }
+                    <span asp-validation-for="Anio" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-outline-primary float-end">Guardar</button>
+                    <a asp-controller="IndicadorPorPais" asp-action="Index" class="btn btn-outline-warning float-end me-2">Volver</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

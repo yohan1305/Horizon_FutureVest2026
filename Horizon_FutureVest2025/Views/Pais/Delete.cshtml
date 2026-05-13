@@ -1,0 +1,21 @@
+﻿@model Application.ViewModels.Pais.DeletePaisViewModel
+@{
+    ViewData["Title"] = "Eliminar país";
+}
+
+<div class="col-12 col-md-6 offset-md-3">
+    <div class="card">
+        <div class="card-header bg-danger text-light">
+            <h4 class="text-center">¿Estás seguro que deseas eliminar el país - @Model.Name?</h4>
+        </div>
+        <div class="card-body">
+            <form asp-controller="Pais" asp-action="Delete" method="POST">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-danger me-2">Eliminar</button>
+                    <a asp-controller="Pais" asp-action="Index" class="btn btn-outline-warning">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

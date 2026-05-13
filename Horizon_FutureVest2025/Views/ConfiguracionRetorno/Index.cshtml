@@ -1,0 +1,91 @@
+﻿@model Application.ViewModels.ConfiguracionRetorno.ConfiguracionRetornoViewModel
+@{
+    ViewData["Title"] = "Configuración de Tasa de Retorno";
+}
+
+<div class="col-12 col-md-6 offset-md-3">
+    <div class="card">
+        <div class="card-header bg-primary text-light">
+            <h4 class="text-center">Configuración de Tasa de Retorno</h4>
+        </div>
+        <div class="card-body">
+
+            @* Mensaje de confirmación *@
+            @if (TempData["Mensaje"] != null)
+            {
+                <div class="alert alert-success text-center">
+                    @TempData["Mensaje"]
+                </div>
+            }
+
+            <form asp-controller="ConfiguracionRetorno" asp-action="Guardar" method="POST" class="form-card">
+
+                <input type="hidden" asp-for="Id" />
+
+                <h2 class="mb-4 text-center">
+                    <i class="bi bi-cash-coin"></i>
+                    Configuración de Retorno
+                </h2>
+
+                <div class="mb-3">
+
+                    <label asp-for="TasaMinima" class="form-label">
+                        <i class="bi bi-graph-down-arrow"></i>
+                        Tasa mínima estimada
+                    </label>
+
+                    <input asp-for="TasaMinima"
+                           class="form-control"
+                           step="0.0001"
+                           type="number" />
+
+                    <span asp-validation-for="TasaMinima" class="text-danger"></span>
+
+                    <small>
+                        Valor recomendado: 2% (2.00)
+                    </small>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="TasaMaxima" class="form-label">
+                        <i class="bi bi-graph-up-arrow"></i>
+                        Tasa máxima estimada
+                    </label>
+
+                    <input asp-for="TasaMaxima"
+                           class="form-control"
+                           step="0.0001"
+                           type="number" />
+
+                    <span asp-validation-for="TasaMaxima" class="text-danger"></span>
+
+                    <small>
+                        Valor recomendado: 15% (15.00)
+                    </small>
+
+                </div>
+
+                <div class="mt-4 d-flex justify-content-end gap-2">
+
+                    <a asp-controller="ConfiguracionRetorno"
+                           asp-action="Index"
+                           class="btn btn-outline-warning">
+
+                        <i class="bi bi-arrow-left"></i>
+                        Volver
+                    </a>
+
+                    <button type="submit" class="btn btn-outline-primary">
+
+                        <i class="bi bi-floppy-fill"></i>
+                        Guardar
+                    </button>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

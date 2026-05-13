@@ -1,0 +1,43 @@
+﻿@model List<Application.ViewModels.Pais.PaisViewModel>
+@{
+    ViewData["Title"] = "Mantenimiento de Países";
+}
+
+<div class="row">
+    <div class="text-center">
+        <h1 class="display-4">Países</h1>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12 col-md-3">
+        <a class="btn btn-outline-success" asp-controller="Pais" asp-action="Create">+ Nuevo país</a>
+    </div>
+</div>
+
+<div class="row mt-2">
+    @if (Model.Count == 0)
+    {
+        <div class="text-center">
+            <h4 class="display-6">No hay países registrados</h4>
+        </div>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-12 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <h6 class="card-subtitle">@item.CodigoIso</h6>
+                        <div class="mt-2">
+                            <a class="btn btn-outline-warning float-end" asp-controller="Pais" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                            <a class="btn btn-outline-danger float-end me-2" asp-controller="Pais" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

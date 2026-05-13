@@ -1,0 +1,45 @@
+﻿@model Application.ViewModels.Macroindicador.SaveMacroindicadorViewModel
+@{
+    bool editMode = ViewBag.EditMode ?? false;
+    ViewData["Title"] = "Guardar macroindicador";
+}
+
+<div class="col-12 col-md-6 offset-md-3">
+    <div class="card">
+        <div class="card-header bg-success text-light">
+            <h5 class="text-center">@(editMode ? "Editar - " + Model.Name : "Nuevo macroindicador")</h5>
+        </div>
+        <div class="card-body">
+            <form asp-controller="Macroindicador" asp-action="@(editMode ? "Edit" : "Create")" method="POST">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Nombre:</label>
+                    <input class="form-control" asp-for="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Peso" class="form-label">Peso:</label>
+                    <input class="form-control" asp-for="Peso" step="any" type="number" />
+                    <span asp-validation-for="Peso" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="EsMejorMasAlto" class="form-label">¿Es mejor más alto?</label>
+                    <select class="form-select" asp-for="EsMejorMasAlto">
+                        <option value="">Seleccione una opción</option>
+                        <option value="true">Sí</option>
+                        <option value="false">No</option>
+                    </select>
+                    <span asp-validation-for="EsMejorMasAlto" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-outline-primary float-end">Guardar</button>
+                    <a asp-controller="Macroindicador" asp-action="Index" class="btn btn-outline-warning float-end me-2">Volver</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

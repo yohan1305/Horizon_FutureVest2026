@@ -1,0 +1,65 @@
+﻿@model Application.ViewModels.Home.RankingGeneralViewModel
+
+@{
+    ViewData["Title"] = "Ranking General";
+}
+
+<h2 class="text-center mb-4">Ranking General</h2>
+
+<form method="get" asp-controller="Home" asp-action="Index" class="mb-4">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-4">
+            <label for="anio" class="form-label">Selecciona el año:</label>
+            <select id="anio" name="anio" class="form-select">
+                @foreach (var año in Model.AñosDisponibles.OrderByDescending(a => a))
+                {
+                    <option value="@año" selected="@(año == Model.AnioSeleccionado)">@año</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Obtener ranking</button>
+        </div>
+    </div>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="alert alert-warning mt-3">
+        @Model.Mensaje
+        @if (Model.Mensaje.Contains("macroindicadores"))
+        {
+            <a href="/Macroindicador" class="btn btn-link">Ir al mantenimiento de macroindicadores</a>
+        }
+        else if (Model.Mensaje.Contains("indicadores"))
+        {
+            <a href="/IndicadorPorPais" class="btn btn-link">Ir al mantenimiento de indicadores por país</a>
+        }
+    </div>
+}
+else if (Model.Ranking.Any())
+{
+    <table class="table table-bordered table-striped mt-4">
+        <thead class="table-dark">
+            <tr>
+                <th>Posicion</th>
+                <th>País</th>
+                <th>Código ISO</th>
+                <th>Scoring</th>
+                <th>Tasa de Retorno (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Ranking)
+            {
+                <tr>
+                    <td>@item.Posicion</td>
+                    <td>@item.NombrePais</td>
+                    <td>@item.CodigoIso</td>
+                    <td>@item.Scoring.ToString("F2")</td>
+                    <td>@item.TasaRetorno.ToString("F2")%</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
