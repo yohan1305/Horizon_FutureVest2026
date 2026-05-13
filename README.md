@@ -1,5 +1,4 @@
 # Horizon FutureVest - Intelligence for Global Investment 📈
----
 **Horizon FutureVest** es una plataforma de análisis macroeconómico de alto nivel diseñada para transformar datos complejos en decisiones de inversión estratégicas. Mediante un motor matemático de **Scoring Ponderado** y **Normalización Min-Max**, el sistema permite evaluar objetivamente el riesgo y la rentabilidad de mercados internacionales. Esta herramienta elimina sesgos analíticos al procesar múltiples indicadores bajo un modelo de escalamiento de datos que garantiza comparaciones precisas entre naciones con realidades económicas distintas.
 
 ⚙️ Funcionalidades de Alto Valor
@@ -46,6 +45,5 @@ El proyecto destaca por una arquitectura limpia y desacoplada, demostrando un al
   <img src="screenshots/ConfiguracionTasas.png">
 
 ## 👨‍💻 Lead Developer
----
 * **Yohansel Mieses** – miesesyohansel@gmail.com
 * *Desarrollador de Software enfocado en soluciones robustas, escalables y orientadas a resultados.*
